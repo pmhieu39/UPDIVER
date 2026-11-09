@@ -243,10 +243,7 @@ export default function App() {
 
           {/* Main Headline */}
           <h1 className="mb-5 text-4xl sm:text-6xl font-black tracking-tight text-white drop-shadow-[0_4px_16px_rgba(0,0,0,0.5)]">
-            Tải File Google Drive <br className="hidden sm:inline" />
-            <span className="bg-gradient-to-r from-sky-300 via-teal-200 to-amber-200 bg-clip-text text-transparent">
-              Không Bị Giới Hạn 24h
-            </span>
+            Tải File Google Drive
           </h1>
 
           {/* Subtitle */}
