@@ -231,7 +231,7 @@ export default function App() {
 
             {/* Subtitle */}
             <p className="mb-10 text-lg leading-8 text-white/90 sm:text-xl max-w-3xl mx-auto font-normal drop-shadow">
-              Hệ thống proxy download an toàn, vượt qua mọi giới hạn tải xuống 24h của Google Drive. Tốc độ cực nhanh, bảo mật 100%.
+              Tải file Google Drive bị lỗi hết lượt tải trong ngày siêu nhanh. Tốc độ tối đa, hoàn toàn miễn phí và không cần đăng nhập.
             </p>
 
             {/* Input Box & Action Button */}
@@ -242,7 +242,7 @@ export default function App() {
                     type="text"
                     value={driveUrl}
                     onChange={(e) => setDriveUrl(e.target.value)}
-                    placeholder="https://drive.google.com/file/d/.../view"
+                    placeholder="Dán link Google Drive vào đây (file hoặc thư mục)..."
                     className="w-full rounded-full border border-white/20 bg-black/40 pl-6 pr-24 py-4 text-white placeholder-white/45 backdrop-blur-2xl focus:border-sky-400/80 focus:outline-none focus:ring-2 focus:ring-sky-400/30 transition-all text-sm sm:text-base shadow-2xl"
                   />
                   {/* Quick Paste or Clear Button */}
