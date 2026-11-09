@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none">
+  <defs>
+    <linearGradient id="miniMhGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#38bdf8"/>
+      <stop offset="50%" stop-color="#818cf8"/>
+      <stop offset="100%" stop-color="#c084fc"/>
+    </linearGradient>
+    <linearGradient id="miniBg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1e293b"/>
+      <stop offset="100%" stop-color="#090d16"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="64" height="64" rx="18" fill="url(#miniBg)"/>
+  <rect width="64" height="64" rx="18" stroke="rgba(255,255,255,0.2)" stroke-width="2"/>
+  <rect width="64" height="64" rx="18" fill="url(#miniMhGrad)" opacity="0.15"/>
+
+  <!-- Stylized M -->
+  <path d="M16 46V22L26 34L36 22V46" stroke="url(#miniMhGrad)" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+  <!-- Arrow Up Accent -->
+  <path d="M42 30L48 24L54 30" stroke="#38bdf8" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M48 24V44" stroke="#38bdf8" stroke-width="3" stroke-linecap="round"/>
+</svg>

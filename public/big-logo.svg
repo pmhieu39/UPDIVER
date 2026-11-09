@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 50" fill="none">
+  <defs>
+    <linearGradient id="mhGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#38bdf8"/>
+      <stop offset="50%" stop-color="#818cf8"/>
+      <stop offset="100%" stop-color="#c084fc"/>
+    </linearGradient>
+    <linearGradient id="iconBg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1e293b"/>
+      <stop offset="100%" stop-color="#0f172a"/>
+    </linearGradient>
+    <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="3" result="blur" />
+      <feComposite in="SourceGraphic" in2="blur" operator="over" />
+    </filter>
+  </defs>
+
+  <!-- Logo Mark Squircle -->
+  <rect x="2" y="5" width="40" height="40" rx="12" fill="url(#iconBg)" stroke="rgba(255,255,255,0.15)" stroke-width="1.5"/>
+  <rect x="2" y="5" width="40" height="40" rx="12" fill="url(#mhGrad)" opacity="0.12"/>
+  
+  <!-- Stylized M in Icon -->
+  <path d="M12 32V18L18 26L24 18V32" stroke="url(#mhGrad)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+  <!-- Drive Arrow Up/Cloud Accent -->
+  <path d="M28 22L32 18L36 22" stroke="#38bdf8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M32 18V31" stroke="#38bdf8" stroke-width="2" stroke-linecap="round"/>
+
+  <!-- Brand Text: MH DRIVER -->
+  <text x="54" y="33" font-family="'Plus Jakarta Sans', system-ui, -apple-system, sans-serif" font-weight="900" font-size="22" letter-spacing="0.5" fill="#ffffff">
+    MH
+  </text>
+  <text x="96" y="33" font-family="'Plus Jakarta Sans', system-ui, -apple-system, sans-serif" font-weight="800" font-size="22" letter-spacing="3" fill="url(#mhGrad)">
+    DRIVER
+  </text>
+  
+  <!-- Subtitle Tag -->
+  <rect x="200" y="16" width="36" height="16" rx="8" fill="rgba(56, 189, 248, 0.15)" stroke="rgba(56, 189, 248, 0.3)" stroke-width="1"/>
+  <text x="218" y="27.5" font-family="'Plus Jakarta Sans', system-ui, sans-serif" font-weight="700" font-size="8.5" fill="#38bdf8" text-anchor="middle">PRO</text>
+</svg>
