@@ -1,5 +1,10 @@
 /**
- * Cloudflare Pages Functions: Full Backend API Router for MH DRIVER (UPDIVER)
+ * ==============================================================================
+ * © 2026 MH DRIVER (MH DIVER). TẤT CẢ CÁC QUYỀN ĐƯỢC BẢO LƯU.
+ * ALL RIGHTS RESERVED. BẢN QUYỀN THUỘC VỀ MH DRIVER / MH DIVER.
+ * Cloudflare Pages Functions - Native Worker API Engine.
+ * Nghiêm cấm mọi hành vi sao chép trái phép.
+ * ==============================================================================
  */
 
 function parseDriveUrl(input) {
@@ -106,11 +111,14 @@ export async function onRequest(context) {
   const url = new URL(request.url);
   const path = url.pathname;
 
-  // CORS headers
+  // Anti-theft CORS & Copyright headers
   const corsHeaders = {
     'Access-Control-Allow-Origin': '*',
     'Access-Control-Allow-Methods': 'GET, POST, OPTIONS',
     'Access-Control-Allow-Headers': 'Content-Type',
+    'X-Powered-By': 'MH-DRIVER-Cloudflare',
+    'X-Author': 'MH DRIVER (MH DIVER)',
+    'X-Copyright': 'Copyright (C) 2026 MH DRIVER (MH DIVER). All Rights Reserved.',
   };
 
   if (request.method === 'OPTIONS') {
@@ -119,7 +127,12 @@ export async function onRequest(context) {
 
   // /api/health
   if (path === '/api/health') {
-    return new Response(JSON.stringify({ status: 'ok', service: 'MH DRIVER on Cloudflare', version: '1.0.0' }), {
+    return new Response(JSON.stringify({
+      status: 'ok',
+      service: 'MH DRIVER on Cloudflare',
+      copyright: '© 2026 MH DRIVER (MH DIVER). All Rights Reserved.',
+      version: '1.0.0'
+    }), {
       headers: { ...corsHeaders, 'Content-Type': 'application/json' }
     });
   }
@@ -135,12 +148,12 @@ export async function onRequest(context) {
 
       if (parsed.type === 'folder') {
         const files = await fetchFolderFiles(parsed.id);
-        return new Response(JSON.stringify({ files, isFolder: true, folderId: parsed.id }), {
+        return new Response(JSON.stringify({ files, isFolder: true, folderId: parsed.id, copyright: 'MH DRIVER (MH DIVER)' }), {
           headers: { ...corsHeaders, 'Content-Type': 'application/json' }
         });
       } else {
         const file = await fetchFileInfo(parsed.id);
-        return new Response(JSON.stringify({ files: [file], isFolder: false, fileId: parsed.id }), {
+        return new Response(JSON.stringify({ files: [file], isFolder: false, fileId: parsed.id, copyright: 'MH DRIVER (MH DIVER)' }), {
           headers: { ...corsHeaders, 'Content-Type': 'application/json' }
         });
       }
@@ -165,7 +178,6 @@ export async function onRequest(context) {
       const googleDirectUrl = `https://drive.usercontent.google.com/download?id=${targetFileId}&export=download&confirm=t`;
       const driveLink = `https://drive.google.com/file/d/${targetFileId}/view`;
 
-      // Return fast completion job
       const jobId = 'cf_' + targetFileId;
       return new Response(JSON.stringify({
         job_id: jobId,
@@ -175,7 +187,8 @@ export async function onRequest(context) {
         driveLink,
         directUrl: directStreamUrl,
         googleDirectUrl,
-        file: fileInfo
+        file: fileInfo,
+        copyright: 'MH DRIVER (MH DIVER)'
       }), {
         headers: { ...corsHeaders, 'Content-Type': 'application/json' }
       });
@@ -200,7 +213,8 @@ export async function onRequest(context) {
       driveLink,
       directUrl: directStreamUrl,
       googleDirectUrl,
-      file: fileInfo
+      file: fileInfo,
+      copyright: 'MH DRIVER (MH DIVER)'
     }), {
       headers: { ...corsHeaders, 'Content-Type': 'application/json' }
     });
@@ -223,6 +237,8 @@ export async function onRequest(context) {
       const responseHeaders = new Headers(driveRes.headers);
       responseHeaders.set('Content-Disposition', `attachment; filename="${encodeURIComponent(name)}"`);
       responseHeaders.set('Access-Control-Allow-Origin', '*');
+      responseHeaders.set('X-Author', 'MH DRIVER (MH DIVER)');
+      responseHeaders.set('X-Copyright', '© 2026 MH DRIVER (MH DIVER)');
 
       return new Response(driveRes.body, {
         status: driveRes.status,

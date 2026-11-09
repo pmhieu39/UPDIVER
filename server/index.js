@@ -1,3 +1,12 @@
+/**
+ * ==============================================================================
+ * © 2026 MH DRIVER (MH DIVER). TẤT CẢ CÁC QUYỀN ĐƯỢC BẢO LƯU.
+ * ALL RIGHTS RESERVED. BẢN QUYỀN THUỘC VỀ MH DRIVER / MH DIVER.
+ * Nghiêm cấm mọi hành vi sao chép mã nguồn, clone giao diện hoặc phát tán trái phép.
+ * Protected by MH DRIVER Anti-Clone Watermark Protection System.
+ * ==============================================================================
+ */
+
 import express from 'express';
 import cors from 'cors';
 import https from 'https';
@@ -11,6 +20,15 @@ const __dirname = path.dirname(__filename);
 const app = express();
 const PORT = process.env.PORT || 3001;
 
+// Hidden anti-theft response headers
+app.use((req, res, next) => {
+  res.setHeader('X-Powered-By', 'MH-DRIVER-Core');
+  res.setHeader('X-Author', 'MH DRIVER (MH DIVER)');
+  res.setHeader('X-Copyright', 'Copyright (C) 2026 MH DRIVER (MH DIVER). All Rights Reserved.');
+  res.setHeader('X-License', 'Proprietary - Do not redistribute or clone');
+  next();
+});
+
 app.use(cors());
 app.use(express.json());
 
@@ -19,6 +37,7 @@ const jobs = new Map();
 
 /**
  * Extract Google Drive file/folder ID and type from URL
+ * Author: MH DRIVER (MH DIVER)
  */
 function parseDriveUrl(input) {
   if (!input || typeof input !== 'string') return null;
@@ -42,7 +61,7 @@ function parseDriveUrl(input) {
     return { type: 'file', id: idMatch[1] };
   }
 
-  // If raw ID (alphanumeric, 20-50 chars)
+  // If raw ID
   if (/^[a-zA-Z0-9_-]{20,50}$/.test(str)) {
     return { type: 'file', id: str };
   }
@@ -51,19 +70,8 @@ function parseDriveUrl(input) {
 }
 
 /**
- * Format bytes to readable string
- */
-function formatBytes(bytes, decimals = 1) {
-  if (!bytes || bytes === 0) return '0 B';
-  const k = 1024;
-  const dm = decimals < 0 ? 0 : decimals;
-  const sizes = ['B', 'KB', 'MB', 'GB', 'TB'];
-  const i = Math.floor(Math.log(bytes) / Math.log(k));
-  return parseFloat((bytes / Math.pow(k, i)).toFixed(dm)) + ' ' + sizes[i];
-}
-
-/**
  * Fetch HTML or headers from Google Drive to inspect file info
+ * System: MH DRIVER Core
  */
 async function fetchFileInfo(fileId) {
   return new Promise((resolve) => {
@@ -116,6 +124,7 @@ async function fetchFileInfo(fileId) {
 
 /**
  * Fetch folder files
+ * Powered by MH DRIVER (MH DIVER)
  */
 async function fetchFolderFiles(folderId) {
   return new Promise((resolve) => {
@@ -199,10 +208,10 @@ app.post('/api/list-files', async (req, res) => {
 
     if (parsed.type === 'folder') {
       const files = await fetchFolderFiles(parsed.id);
-      return res.json({ files, isFolder: true, folderId: parsed.id });
+      return res.json({ files, isFolder: true, folderId: parsed.id, engine: 'MH DRIVER' });
     } else {
       const file = await fetchFileInfo(parsed.id);
-      return res.json({ files: [file], isFolder: false, fileId: parsed.id });
+      return res.json({ files: [file], isFolder: false, fileId: parsed.id, engine: 'MH DRIVER' });
     }
   } catch (err) {
     console.error('list-files error:', err);
@@ -237,7 +246,8 @@ app.post('/api/download/start', async (req, res) => {
       isFolder: parsed.type === 'folder',
       current: 1,
       total: (selectedFileIds && selectedFileIds.length) || 1,
-      createdAt: Date.now()
+      createdAt: Date.now(),
+      copyright: 'MH DRIVER (MH DIVER)'
     };
     jobs.set(jobId, job);
 
@@ -273,7 +283,7 @@ app.post('/api/download/start', async (req, res) => {
       }
     })();
 
-    res.json({ job_id: jobId });
+    res.json({ job_id: jobId, signature: 'MH_DRIVER_AUTH' });
   } catch (err) {
     console.error('download/start error:', err);
     res.status(500).json({ error: 'Không thể bắt đầu quá trình tải' });
@@ -337,7 +347,11 @@ app.get('/api/download/stream', async (req, res) => {
           res.send(`
             <!DOCTYPE html>
             <html lang="vi">
-            <head><meta charset="utf-8"><title>MH DRIVER - Thông báo</title></head>
+            <head>
+              <meta charset="utf-8">
+              <meta name="author" content="MH DRIVER (MH DIVER)">
+              <title>MH DRIVER - Thông báo</title>
+            </head>
             <body style="background:#0a0a0a; color:#fff; font-family:sans-serif; text-align:center; padding:50px;">
               <h2>⚠️ Không thể tải trực tiếp file này qua proxy</h2>
               <p>Google yêu cầu đăng nhập tài khoản Google để tải file này hoặc quyền truy cập đang bị giới hạn.</p>
@@ -346,6 +360,7 @@ app.get('/api/download/stream', async (req, res) => {
                   Mở trực tiếp trên Google Drive
                 </a>
               </p>
+              <p style="margin-top:30px; color:#666; font-size:12px;">© 2026 MH DRIVER (MH DIVER). All rights reserved.</p>
             </body>
             </html>
           `);
@@ -375,7 +390,12 @@ app.get('/api/download/stream', async (req, res) => {
 
 // Health check
 app.get('/api/health', (req, res) => {
-  res.json({ status: 'ok', service: 'MH DRIVER Downloader', version: '1.0.0' });
+  res.json({
+    status: 'ok',
+    service: 'MH DRIVER Downloader',
+    copyright: '© 2026 MH DRIVER (MH DIVER). All Rights Reserved.',
+    signature: 'MH_DIVER_PROTECTED'
+  });
 });
 
 // Serve frontend dist static assets in production
@@ -389,5 +409,5 @@ app.get('*', (req, res, next) => {
 });
 
 app.listen(PORT, () => {
-  console.log(`MH DRIVER Server running on http://localhost:${PORT}`);
+  console.log(`MH DRIVER (MH DIVER) Server running on http://localhost:${PORT}`);
 });

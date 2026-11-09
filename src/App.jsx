@@ -1,3 +1,12 @@
+/**
+ * ==============================================================================
+ * © 2026 MH DRIVER (MH DIVER). TẤT CẢ CÁC QUYỀN ĐƯỢC BẢO LƯU.
+ * ALL RIGHTS RESERVED. PHÁT TRIỂN BỞI MH DRIVER / MH DIVER.
+ * Nghiêm cấm mọi hành vi sao chép mã nguồn và giao diện.
+ * Watermark Tag: MH_DIVER_PROTECTED_APP
+ * ==============================================================================
+ */
+
 import React, { useState, useEffect, useRef } from 'react';
 import axios from 'axios';
 import {
@@ -198,7 +207,7 @@ export default function App() {
   };
 
   return (
-    <div className="relative min-h-screen w-full overflow-y-auto bg-black pb-12 font-sans flex flex-col justify-between">
+    <div className="relative min-h-screen w-full overflow-y-auto bg-black font-sans flex flex-col justify-between" data-author="MH DRIVER (MH DIVER)">
       {/* iOS 16 Wallpaper Background */}
       <WallpaperBackground />
 
@@ -460,6 +469,19 @@ export default function App() {
           </div>
         </div>
       </main>
+
+      {/* Footer Copyright Watermark */}
+      <footer className="relative z-10 py-4 text-center text-xs text-white/40 border-t border-white/5 backdrop-blur-md">
+        <p>© 2026 <strong className="text-white/70 font-semibold">MH DRIVER</strong> (MH DIVER). Bản quyền được bảo hộ • Nghiêm cấm sao chép.</p>
+      </footer>
+
+      {/* Hidden DOM Security Watermark Tag */}
+      <div
+        className="hidden"
+        aria-hidden="true"
+        data-mh-diver-signature="MH_DIVER_PROTECTED_2026_GENUINE_SYSTEM"
+        data-owner="MH DRIVER (MH DIVER)"
+      />
 
       {/* History Modal */}
       <HistoryModal
